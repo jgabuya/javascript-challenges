@@ -2,50 +2,28 @@ const stackMachineCalculator = (instructions) => {
     const instStack = instructions.trim().split(' ');
     let resStack = [];
 
-    const doAdd = stack => {
-        stack.push(stack.pop() + stack.pop());
-    };
-
-    const doSub = stack => {
-        stack.push(stack.pop() - stack.pop());
-    };
-
-    const doPop = stack => {
-        stack.pop();
-    };
-
-    const doDup = stack => {
-        stack.push(stack[stack.length - 1]);
-    };
-
-    const doInt = (stack, val) => {
-        stack.push(val);
-    };
-
     const doProcess = (stack, val) => {
         switch (val) {
             case 'ADD':
-                doAdd(stack);
+                stack.push(stack.pop() + stack.pop());
                 break;
 
             case 'SUB':
-                doSub(stack);
+                stack.push(stack.pop() - stack.pop());
                 break;
 
             case 'POP':
-                doPop(stack);
+                stack.pop();
                 break;
 
             case 'DUP':
-                doDup(stack);
+                stack.push(stack[stack.length - 1]);
                 break;
 
             default:
-                doInt(stack, Number(val));
+                stack.push(Number(val));
                 break;
         }
-
-        return stack;
     };
 
     instStack.forEach((instruction) => {
